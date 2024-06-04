@@ -44,7 +44,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar fixed z-10 max-w-[1440px] bg-[#F5F5F5] bg-opacity-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div
