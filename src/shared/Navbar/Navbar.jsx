@@ -44,7 +44,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar fixed z-10 max-w-[1440px] bg-[#F5F5F5] bg-opacity-10">
+    <div className="navbar fixed z-10 max-w-[1440px] bg-[#F5F5F5] bg-opacity-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -64,10 +64,12 @@ const Navbar = () => {
         <img src={logo} alt="apply4scholar logo" />
       </div>
       <div className="navbar-center hidden">
-        <ul className="menu menu-horizontal px-1">{navlinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-white">{navlinks}</ul>
       </div>
       <div className="navbar-end">
-        <ul className="menu menu-horizontal px-2 hidden lg:flex">{navlinks}</ul>
+        <ul className="menu menu-horizontal px-2 text-white hidden lg:flex">
+          {navlinks}
+        </ul>
         <a className="btn">Button</a>
       </div>
     </div>
