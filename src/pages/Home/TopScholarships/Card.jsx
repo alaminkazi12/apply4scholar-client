@@ -55,7 +55,7 @@ const Card = ({ item }) => {
           </li>
         </ul>
         <div className="mt-6 pt-4">
-          <Link>
+          <Link to={`/scholarship/${item._id}`}>
             <PrimaryButton text={"View Details"}></PrimaryButton>
           </Link>
         </div>
