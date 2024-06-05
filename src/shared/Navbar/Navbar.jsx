@@ -1,6 +1,6 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/Apply4Scholar_logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   const navlinks = (
     <>
@@ -70,7 +70,11 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-2 text-white hidden lg:flex">
           {navlinks}
         </ul>
-        <a className="btn">Button</a>
+        <div>
+          <Link to="/login" className="btn ">
+            Login
+          </Link>
+        </div>
       </div>
     </div>
   );
