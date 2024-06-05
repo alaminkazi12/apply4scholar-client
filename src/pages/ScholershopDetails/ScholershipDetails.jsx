@@ -3,6 +3,7 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import SecondaryButton from "../../components/buttons/SecondaryButton";
 
 const ScholershipDetails = () => {
   const { id } = useParams();
@@ -53,7 +54,12 @@ const ScholershipDetails = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            {university_name}
+            <div className="flex flex-col md:flex-row  justify-between">
+              <div>{university_name}</div>
+              <div>
+                <SecondaryButton text={"Apply Now"}></SecondaryButton>
+              </div>
+            </div>
           </motion.h2>
           <motion.p
             className="text-gray-600 mb-4 flex gap-4"
@@ -127,7 +133,8 @@ const ScholershipDetails = () => {
           </div>
           <div className="mb-4">
             <h3 className="text-xl font-semibold mb-2">Reviews</h3>
-            {/* <p className="text-gray-700">{reviews}</p> */}
+            {/* reviews will be shown here  */}
+            <div></div>
           </div>
         </div>
       </motion.div>
