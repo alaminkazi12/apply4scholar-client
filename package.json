@@ -25,6 +25,7 @@
     "react-parallax": "^3.5.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5",
     "react-tooltip": "^5.26.4",
     "sort-by": "^1.2.0"
   },

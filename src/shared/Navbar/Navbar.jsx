@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Tooltip } from "react-tooltip";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 

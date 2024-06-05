@@ -3,7 +3,8 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const validate = (values) => {
   const errors = {};
@@ -52,8 +53,10 @@ const validate = (values) => {
 };
 
 const SignUp = () => {
-  const { updateUserProfile, signUp } = useContext(AuthContext);
+  const { updateUserProfile, signUp, logOut } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [signUpError, setupSignUpError] = useState("");
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -86,14 +89,25 @@ const SignUp = () => {
       // Sign up with email
       signUp(email, password)
         .then((userCredential) => {
+          toast.success("Account Created Successfully!", {
+            position: "top-right",
+          });
           // Update profile
           updateUserProfile(name, photo).then(() => {});
           console.log(userCredential);
+
+          // logout
+          logOut();
+
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
+          setupSignUpError(errorMessage.split("(auth/")[1].split(")")[0]);
         });
     },
   });
@@ -258,6 +272,7 @@ const SignUp = () => {
                 </div>
               ) : null}
             </div>
+            {signUpError && <p className="text-red-500">{signUpError}</p>}
 
             <button
               type="submit"

@@ -3,10 +3,12 @@ import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { login, googleLogin, gitHubLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [signInError, setupSignInError] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -25,11 +27,15 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+          toast.success("Logged In Successfully!", {
+            position: "top-right",
+          });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
+          setupSignInError(errorMessage.split("(auth/")[1].split(")")[0]);
         });
     },
   });
@@ -97,6 +103,8 @@ const Login = () => {
                 </div>
               ) : null}
             </div>
+
+            {signInError && <p className=" text-red-800">{signInError}</p>}
 
             <button
               type="submit"
