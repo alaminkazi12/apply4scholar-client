@@ -1,7 +1,12 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/Apply4Scholar_logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
+import { Tooltip } from "react-tooltip";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   const navlinks = (
     <>
       <li>
@@ -43,6 +48,12 @@ const Navbar = () => {
     </>
   );
 
+  const handleLogout = () => [
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error)),
+  ];
+
   return (
     <div className="navbar fixed z-10 max-w-[1440px] bg-[#F5F5F5] bg-opacity-0">
       <div className="navbar-start">
@@ -71,9 +82,51 @@ const Navbar = () => {
           {navlinks}
         </ul>
         <div>
-          <Link to="/login" className="btn ">
-            Login
-          </Link>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                id="profile"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className=" w-8 md:w-10 rounded-full">
+                  <img
+                    alt={user?.displayName || "Image Not Found"}
+                    src={
+                      user?.photoURL || "https://i.ibb.co/bX4Qscm/images.png"
+                    }
+                  />
+                </div>
+              </div>
+              <Tooltip
+                content={user?.displayName}
+                place="top"
+                anchorSelect="#profile"
+              />
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  {user?.displayName || "Not Found"}
+                  {/* <Link to="/profile" className="justify-between">
+                  
+                </Link> */}
+                </li>
+                {/* <li>
+                <Link to="/update_profile">Update Profile</Link>
+              </li> */}
+                <li onClick={handleLogout}>
+                  <a>Log Out</a>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to="/login" className="btn ">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

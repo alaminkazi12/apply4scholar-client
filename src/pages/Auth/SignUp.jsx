@@ -3,6 +3,7 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const validate = (values) => {
   const errors = {};
@@ -262,9 +263,16 @@ const SignUp = () => {
               type="submit"
               className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
             >
-              Submit
+              SignUp
             </button>
           </form>
+          <p className="mt-2">
+            Already Have An Account? Please{"   "}
+            <Link className="text-blue-500 font-bold" to="/login">
+              Login {"   "}
+            </Link>
+            Now
+          </p>
         </div>
       </div>
     </div>
