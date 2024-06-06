@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthProvider";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const validate = (values) => {
   const errors = {};
@@ -53,6 +54,7 @@ const validate = (values) => {
 };
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const { updateUserProfile, signUp, logOut } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [signUpError, setupSignUpError] = useState("");
@@ -96,12 +98,24 @@ const SignUp = () => {
           updateUserProfile(name, photo).then(() => {});
           console.log(userCredential);
 
-          // logout
-          logOut();
+          // create user entry in the database
+          const userInfo = {
+            userName: name,
+            userEmail: email,
+            role: "user",
+          };
+          console.log(userInfo);
+          axiosPublic.post("/users", userInfo).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              // logout
+              logOut();
 
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
+              setTimeout(() => {
+                navigate("/login");
+              }, 2000);
+            }
+          });
         })
         .catch((error) => {
           const errorCode = error.code;

@@ -2,13 +2,18 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa6";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
   const { login, googleLogin, gitHubLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [signInError, setupSignInError] = useState("");
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -30,6 +35,7 @@ const Login = () => {
           toast.success("Logged In Successfully!", {
             position: "top-right",
           });
+          navigate(location?.state ? location.state : "/");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -40,6 +46,50 @@ const Login = () => {
     },
   });
 
+  // sign in with google
+  const GoogleLoginHandler = () => {
+    googleLogin().then((res) => {
+      console.log(res.user.email);
+
+      const userInfo = {
+        userName: res.user.displayName,
+        userEmail: res.user.email,
+        role: "user",
+      };
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res);
+      });
+
+      toast.success("Logged In Successfully!", {
+        position: "top-right",
+      });
+
+      navigate(location?.state ? location.state : "/");
+    });
+  };
+
+  //   github Login
+  const GithubLoginHandler = () => {
+    gitHubLogin().then((res) => {
+      const userInfo = {
+        userName: res.user.displayName,
+        userEmail: res.user.email,
+        role: "user",
+      };
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res);
+      });
+
+      toast.success("Logged In Successfully!", {
+        position: "top-right",
+      });
+
+      navigate(location?.state ? location.state : "/");
+    });
+  };
+
   return (
     <div>
       <PageTitle
@@ -48,6 +98,21 @@ const Login = () => {
       ></PageTitle>
       <div className="min-h-screen flex flex-col items-center bg-gray-100 py-12">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mt-8">
+          <div className="flex items-center justify-center gap-10 mt-10">
+            <button
+              onClick={GoogleLoginHandler}
+              className="btn btn-circle border-2 border-gray-400 text-3xl"
+            >
+              <FcGoogle />
+            </button>
+            <button
+              onClick={GithubLoginHandler}
+              className="btn btn-circle border-2 border-gray-400 text-3xl"
+            >
+              <FaGithub />
+            </button>
+          </div>
+          <div className="divider text-[#004d99]">Or</div>
           <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
             <div className="mb-4">
               <label

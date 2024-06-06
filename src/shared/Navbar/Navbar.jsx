@@ -4,7 +4,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Tooltip } from "react-tooltip";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -25,7 +24,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/all-scholarship"
+          to="/all-scholarsips"
           className={({ isActive }) =>
             isActive
               ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
@@ -35,18 +34,20 @@ const Navbar = () => {
           All Scholarship
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
-              : ""
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
+                : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
