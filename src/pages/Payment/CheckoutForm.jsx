@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({
   fee,
@@ -22,6 +23,7 @@ const CheckoutForm = ({
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (fee > 0) {
@@ -112,11 +114,30 @@ const CheckoutForm = ({
 
     if (response.data.success) {
       // now post the application to the server
+      const applicationData = {
+        userName: user?.displayName,
+        userEmail: user?.email,
+        userPhoto: response.data.data.display_url,
+        scholarship_id: id,
+        date: new Date(),
+        university_name: university_name,
+        subject_name: subject_name,
+        scholarship_category: scholarship_category,
+        phone: data.phone,
+        addess: data.addess,
+        degree: data.degree,
+        gender: data.gender,
+        ssc: data.ssc,
+        hsc: data.hsc,
+        studyGap: data.studyGap,
+      };
+
+      const applicatonRes = await axiosSecure.post("/apply", applicationData);
+      if (applicatonRes.data.insertedId) {
+        toast.success("Successfully Applied");
+        navigate("/");
+      }
     }
-
-    const userImage = response.data.data.display_url;
-
-    // now post the application to the server
   };
 
   return (
