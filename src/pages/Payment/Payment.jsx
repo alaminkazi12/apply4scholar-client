@@ -10,9 +10,14 @@ const stripePromise = loadStripe(import.meta.env.VITE_stripe_key);
 const Payment = () => {
   const { id } = useParams();
   const [scholarship] = useSingleScholarship(id);
-  const { application_fees } = scholarship;
+  const {
+    application_fees,
+    scholarship_category,
+    subject_name,
+    university_name,
+  } = scholarship;
   const fee = parseInt(application_fees?.replace("$", "")) || 0;
-  console.log(fee);
+  console.log(subject_name, scholarship_category);
 
   return (
     <div>
@@ -22,7 +27,13 @@ const Payment = () => {
       ></PageTitle>
       <div>
         <Elements stripe={stripePromise}>
-          <CheckoutForm fee={fee} id={id}></CheckoutForm>
+          <CheckoutForm
+            fee={fee}
+            id={id}
+            scholarship_category={scholarship_category}
+            subject_name={subject_name}
+            university_name={university_name}
+          ></CheckoutForm>
         </Elements>
       </div>
     </div>

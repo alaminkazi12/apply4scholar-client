@@ -5,8 +5,15 @@ import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
+import axios from "axios";
 
-const CheckoutForm = ({ fee, id }) => {
+const CheckoutForm = ({
+  fee,
+  id,
+  scholarship_category,
+  subject_name,
+  university_name,
+}) => {
   const [error, setError] = useState("");
   const [tnxid, setTnxid] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -90,8 +97,27 @@ const CheckoutForm = ({ fee, id }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    const formData = new FormData();
+    formData.append("image", data.photo[0]);
+    // upload image to imgbb and get the url
+    const response = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_image_api_key
+      }`,
+      formData
+    );
+
+    if (response.data.success) {
+      // now post the application to the server
+    }
+
+    const userImage = response.data.data.display_url;
+
+    // now post the application to the server
+  };
 
   return (
     <div>
@@ -174,7 +200,7 @@ const CheckoutForm = ({ fee, id }) => {
                 {...register("gender", { required: true })}
                 className="select select-bordered w-full"
               >
-                <option disabled selected>
+                <option disabled defaultChecked>
                   Select Your Gender
                 </option>
                 <option value="female">Female</option>
@@ -241,7 +267,7 @@ const CheckoutForm = ({ fee, id }) => {
                 {...register("studyGap")}
                 className="select select-bordered w-full"
               >
-                <option disabled defaultValue>
+                <option disabled defaultChecked>
                   Select Your Study Gap
                 </option>
                 <option value="1 year">1 Year</option>
@@ -254,30 +280,33 @@ const CheckoutForm = ({ fee, id }) => {
           <div className=" space-y-2">
             <label className="font-bold">University Name</label>
             <input
+              defaultValue={university_name}
               disabled
               {...register("universityName")}
               type="text"
-              placeholder="Your HSC Result : 4.80"
+              placeholder={university_name}
               className="input input-bordered w-full"
             />
           </div>
           <div className=" space-y-2">
             <label className="font-bold">Scholarship category</label>
             <input
+              defaultValue={scholarship_category}
               disabled
               {...register("scholarshipCategory")}
               type="text"
-              placeholder="Your HSC Result : 4.80"
+              placeholder={scholarship_category}
               className="input input-bordered w-full"
             />
           </div>
           <div className=" space-y-2">
-            <label className="font-bold">Subject Category</label>
+            <label className="font-bold">Subject Name</label>
             <input
+              defaultValue={subject_name}
               disabled
               {...register("subjectCategory")}
               type="text"
-              placeholder="Your HSC Result : 4.80"
+              placeholder={subject_name}
               className="input input-bordered w-full"
             />
           </div>

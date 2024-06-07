@@ -79,7 +79,9 @@ const SignUp = () => {
       formData.append("image", values.userImage);
 
       const response = await axios.post(
-        "https://api.imgbb.com/1/upload?key=a26f2c18da28ff2ef29f687cbf90c728",
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_image_api_key
+        }`,
         formData
       );
       const photo = response.data.data.display_url;
