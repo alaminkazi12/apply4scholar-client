@@ -17,6 +17,8 @@ import AllReviews from "../dashboard/pages/AllReviews/AllReviews";
 import MyApplication from "../dashboard/pages/MyApplication/MyApplication";
 import MyReviews from "../dashboard/pages/MyReviews/MyReviews";
 import DashRoot from "../dashboard/DashRoot";
+import Payment from "../pages/Payment/Payment";
+import PrivateRouter from "../privateroute/PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/scholarship/:id",
-        element: <ScholershipDetails></ScholershipDetails>,
+        element: (
+          <PrivateRouter>
+            <ScholershipDetails></ScholershipDetails>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/login",
@@ -42,6 +48,14 @@ const router = createBrowserRouter([
       {
         path: "/all-scholarsips",
         element: <AllScholarships></AllScholarships>,
+      },
+      {
+        path: "/payment/:id",
+        element: (
+          <PrivateRouter>
+            <Payment></Payment>
+          </PrivateRouter>
+        ),
       },
     ],
   },

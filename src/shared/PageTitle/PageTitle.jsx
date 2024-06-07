@@ -8,8 +8,8 @@ const PageTitle = ({ title, subtitle }) => {
     >
       <div className="absolute inset-0 bg-black opacity-50 rounded-xl"></div>
       <div className="relative z-10 text-center">
-        <h1 className="text-5xl font-bold mb-2">{title}</h1>
-        {subtitle && <p className="text-xl">{subtitle}</p>}
+        <h1 className="text-5xl font-bold mb-2 uppercase">{title}</h1>
+        {subtitle && <p className="text-xl uppercase">{subtitle}</p>}
       </div>
     </div>
   );

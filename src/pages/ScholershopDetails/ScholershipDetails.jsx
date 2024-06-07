@@ -1,18 +1,13 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PageTitle from "../../shared/PageTitle/PageTitle";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
+import useSingleScholarship from "../../hooks/useSingleScholarship";
 
 const ScholershipDetails = () => {
   const { id } = useParams();
-  const [item, setItem] = useState({});
-  const axiosPublic = useAxiosPublic();
-
-  useEffect(() => {
-    axiosPublic.get(`/scholarships/${id}`).then((res) => setItem(res.data));
-  }, [axiosPublic, id]);
+  const [scholarship] = useSingleScholarship(id);
+  console.log(scholarship);
 
   const {
     application_deadline,
@@ -27,9 +22,8 @@ const ScholershipDetails = () => {
     university_image,
     university_location,
     university_name,
-  } = item;
+  } = scholarship;
 
-  console.log(item);
   return (
     <div>
       <PageTitle
@@ -57,7 +51,9 @@ const ScholershipDetails = () => {
             <div className="flex flex-col md:flex-row  justify-between">
               <div>{university_name}</div>
               <div>
-                <SecondaryButton text={"Apply Now"}></SecondaryButton>
+                <Link to={`/payment/${id}`}>
+                  <SecondaryButton text={"Apply Now"}></SecondaryButton>
+                </Link>
               </div>
             </div>
           </motion.h2>
