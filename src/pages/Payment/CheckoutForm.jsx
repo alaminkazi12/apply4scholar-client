@@ -14,6 +14,7 @@ const CheckoutForm = ({
   scholarship_category,
   subject_name,
   university_name,
+  university_location,
 }) => {
   const [error, setError] = useState("");
   const [tnxid, setTnxid] = useState("");
@@ -122,6 +123,10 @@ const CheckoutForm = ({
         date: new Date(),
         university_name: university_name,
         subject_name: subject_name,
+        university_address: {
+          city: university_location.city,
+          country: university_location.country,
+        },
         scholarship_category: scholarship_category,
         phone: data.phone,
         addess: data.addess,
@@ -130,6 +135,7 @@ const CheckoutForm = ({
         ssc: data.ssc,
         hsc: data.hsc,
         studyGap: data.studyGap,
+        status: "pending",
       };
 
       const applicatonRes = await axiosSecure.post("/apply", applicationData);
