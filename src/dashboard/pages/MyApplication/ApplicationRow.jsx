@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import useSingleScholarship from "../../../hooks/useSingleScholarship";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../../context/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const ApplicationRow = ({ item }) => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const {
     scholarship_id,
     university_name,
@@ -22,7 +27,23 @@ const ApplicationRow = ({ item }) => {
   // Handle review button
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const reveiwData = {
+      rating: data.rating,
+      comment: data.comment,
+      data: new Date(),
+      university_name: university_name,
+      userEmail: user?.email,
+      userName: user?.displayName,
+      userImage: user?.photoURL,
+      scholarship_id: scholarship_id,
+    };
+    //    post the review to the db
+    axiosSecure.post("/review", reveiwData).then((res) => {
+      if (res.data.insertedId) {
+        toast.success("Reveiw submitted successfully");
+      }
+    });
+
     // Close the modal after form submission
     setIsModalOpen(false);
     reset(); // Reset form fields
@@ -80,7 +101,7 @@ const ApplicationRow = ({ item }) => {
             </button>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-6 flex flex-col items-center justify-center"
+              className="space-y-6 flex flex-col "
             >
               <h2 className="text-center text-2xl mb-4 uppercase font-bold">
                 REVIEW INFORMATION
