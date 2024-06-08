@@ -93,7 +93,7 @@ const DashRoot = () => {
 
       <li>
         <NavLink
-          to="/dashboard/all-applied-scholarship"
+          to="/dashboard/manage-applied-scholarship"
           className={({ isActive }) =>
             isActive
               ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
@@ -102,6 +102,19 @@ const DashRoot = () => {
         >
           <FaEnvelopeOpen />
           MANAGE APPLIED APPLICATION
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/dashboard/all-applied-scholarship"
+          className={({ isActive }) =>
+            isActive
+              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+              : "text-white"
+          }
+        >
+          <FaEnvelopeOpen />
+          ALL APPLIED APPLICATION
         </NavLink>
       </li>
       <li>

@@ -19,6 +19,7 @@ import MyReviews from "../dashboard/pages/MyReviews/MyReviews";
 import DashRoot from "../dashboard/DashRoot";
 import Payment from "../pages/Payment/Payment";
 import PrivateRouter from "../privateroute/PrivateRouter";
+import ManageAllAppliedScholarship from "../dashboard/pages/ManageAllAppliedScholarship";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/all-applied-scholarship",
         element: <AllAppliesScholarships></AllAppliesScholarships>,
+      },
+      {
+        path: "/dashboard/manage-applied-scholarship",
+        element: <ManageAllAppliedScholarship></ManageAllAppliedScholarship>,
       },
       {
         path: "/dashboard/all-reviews",
