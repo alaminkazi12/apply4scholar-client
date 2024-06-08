@@ -136,7 +136,21 @@ const ApplicationRow = ({ item, refetch }) => {
         <td className="uppercase">{application_fees}</td>
         <td className="uppercase">{service_charge}</td>
         <td>{feedback ? feedback : "None"}</td>
-        <td>{status}</td>
+        <td
+          className={`font-bold capitalize ${
+            status === "pending"
+              ? "text-yellow-500"
+              : status === "processing"
+              ? "text-blue-500"
+              : status === "completed"
+              ? "text-green-500"
+              : status === "rejected"
+              ? "text-red-500"
+              : ""
+          }`}
+        >
+          {status}
+        </td>
         <th>
           <button
             onClick={validateStatus}

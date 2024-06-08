@@ -79,7 +79,6 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
 
         // send the data to server for update
         axiosSecure.put("/application-status", status).then((res) => {
-          console.log(res.data);
           if (res.data.modifiedCount > 0) {
             Swal.fire({
               title: "Rejected!",
@@ -90,6 +89,28 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
             refetch();
           }
         });
+      }
+    });
+  };
+
+  // Function to handle the statas change
+  const handleRoleChange = (event) => {
+    const selectedStatus = event.target.value;
+    const updatedData = {
+      status: selectedStatus,
+      id: _id,
+    };
+
+    // now update the role on database
+    axiosSecure.put("/application-status", updatedData).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Updated!",
+          text: `User now updated as ${selectedStatus}.`,
+          icon: "success",
+        });
+
+        refetch();
       }
     });
   };
@@ -117,7 +138,25 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
               : ""
           }`}
         >
-          {status}
+          <select
+            defaultValue={status}
+            defaultChecked={status}
+            onChange={handleRoleChange}
+            className="select select-bordered w-full  uppercase"
+          >
+            <option value="pending" disabled={status === "pending"}>
+              pending
+            </option>
+            <option value="processing" disabled={status === "processing"}>
+              processing
+            </option>
+            <option value="completed" disabled={status === "completed"}>
+              completed
+            </option>
+            <option value="rejected" disabled>
+              rejected
+            </option>
+          </select>
         </td>
         <th>
           <button
