@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AllAppliedScholarshipRow = ({ item, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,6 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     const feedback = {
       feedback: data.feedback,
       id: _id,
@@ -49,7 +49,6 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
 
     // send the data to server for update
     axiosSecure.put("/feedback", feedback).then((res) => {
-      console.log(res.data);
       if (res.data.modifiedCount) {
         toast.success("Feedback Submitted");
         refetch();
@@ -59,6 +58,41 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
     // Close the modal after form submission
     setIsModalOpen(false);
     reset(); // Reset form fields
+  };
+
+  //   handle cancle
+
+  const handleCancel = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const status = {
+          status: "rejected",
+          id: _id,
+        };
+
+        // send the data to server for update
+        axiosSecure.put("/application-status", status).then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Rejected!",
+              text: "Application has been rejected.",
+              icon: "success",
+            });
+
+            refetch();
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -71,7 +105,21 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
         <td>{degree}</td>
         <td>{application_fees}</td>
         <td>{service_charge}</td>
-        <td>{status}</td>
+        <td
+          className={`font-normal ${
+            status === "pending"
+              ? "text-yellow-500"
+              : status === "processing"
+              ? "text-blue-500"
+              : status === "completed"
+              ? "text-green-500"
+              : status === "rejected"
+              ? "text-red-500"
+              : ""
+          }`}
+        >
+          {status}
+        </td>
         <th>
           <button
             onClick={() => setIsViewDetils(true)}
@@ -89,9 +137,19 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
           </button>
         </th>
         <th>
-          <button className="btn btn-ghost btn-xs text-red-400">
-            <ImCancelCircle />
-          </button>
+          {" "}
+          {status == "rejected" ? (
+            <button disabled className="btn btn-ghost btn-xs text-red-400">
+              <ImCancelCircle />
+            </button>
+          ) : (
+            <button
+              onClick={handleCancel}
+              className="btn btn-ghost btn-xs text-gray-400"
+            >
+              <ImCancelCircle />
+            </button>
+          )}
         </th>
       </tr>
 
