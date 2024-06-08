@@ -1,4 +1,3 @@
-import { MdOutlineShareLocation } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaDollarSign } from "react-icons/fa";
@@ -13,14 +12,12 @@ const Card = ({ item }) => {
     scholarship_category,
     university_name,
     university_image,
-    university_location,
   } = item;
-  console.log(reviews);
-  const total_rating = reviews.reduce(
-    (sum, review) => sum + review.rating_point,
+  const total_rating = reviews?.reduce(
+    (sum, review) => sum + review?.rating_point,
     0
   );
-  const averageRating = total_rating / reviews.length;
+  const averageRating = total_rating / reviews?.length;
 
   return (
     <div className="p-6 border-2 border-[#FF7A00] rounded-2xl space-y-2">
@@ -38,9 +35,9 @@ const Card = ({ item }) => {
           {application_deadline}
         </p>
         <ul className="flex items-center gap-10 text-lg">
-          <li className="flex items-center gap-2">
+          {/* <li className="flex items-center gap-2">
             <MdOutlineShareLocation /> {university_location.country}
-          </li>
+          </li> */}
           <li className="flex items-center gap-2">
             {" "}
             <BiCategoryAlt /> {scholarship_category}

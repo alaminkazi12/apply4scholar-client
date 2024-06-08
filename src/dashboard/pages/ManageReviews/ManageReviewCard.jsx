@@ -1,7 +1,7 @@
-import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { FaTrash } from "react-icons/fa";
 
 const ManageReviewCard = ({ item, refetch }) => {
   const axiosSecure = useAxiosSecure();

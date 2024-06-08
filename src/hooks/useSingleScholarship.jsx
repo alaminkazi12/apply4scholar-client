@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useSingleScholarship = (id) => {
-  console.log(id);
   const axiosSecure = useAxiosSecure();
   const { data: scholarship = [], error } = useQuery({
     queryKey: ["scholarship", id],

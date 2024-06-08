@@ -1,19 +1,43 @@
-import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../context/AuthProvider";
 import ApplicationRow from "./ApplicationRow";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 
 const MyApplication = () => {
-  const [myApplications, setMyApplications] = useState([]);
+  // const [myApplications, setMyApplications] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    axiosSecure.get(`/applications/?email=${user?.email}`).then((res) => {
-      console.log(res.data);
-      setMyApplications(res.data);
-    });
-  }, [axiosSecure, user]);
+  const {
+    data: myApplications = [],
+    refetch,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["myApllication", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/applications/?email=${user?.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  // useEffect(() => {
+  //   axiosSecure.get(`/applications/?email=${user?.email}`).then((res) => {
+  //     console.log(res.data);
+  //     setMyApplications(res.data);
+  //   });
+  // }, [axiosSecure, user]);
 
   return (
     <div className="min-h-screen mt-10">
@@ -39,7 +63,11 @@ const MyApplication = () => {
           </thead>
           <tbody>
             {myApplications.map((item, idx) => (
-              <ApplicationRow key={idx} item={item}></ApplicationRow>
+              <ApplicationRow
+                key={idx}
+                item={item}
+                refetch={refetch}
+              ></ApplicationRow>
             ))}
           </tbody>
         </table>

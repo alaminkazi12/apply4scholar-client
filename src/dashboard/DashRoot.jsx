@@ -7,11 +7,25 @@ import {
   FaPlus,
   FaStar,
 } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashRoot = () => {
   const navlinks = (
     <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+              : "text-white"
+          }
+        >
+          <FaHome />
+          HOME
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="/dashboard/home"
@@ -21,8 +35,8 @@ const DashRoot = () => {
               : "text-white"
           }
         >
-          <FaHome />
-          HOME
+          <MdDashboard />
+          DASHBOARD
         </NavLink>
       </li>
       <li>

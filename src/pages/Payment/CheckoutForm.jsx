@@ -5,7 +5,6 @@ import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({
@@ -101,48 +100,34 @@ const CheckoutForm = ({
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // now post the application to the server
+    const applicationData = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      userPhoto: user?.photoURL,
+      scholarship_id: id,
+      date: new Date(),
+      university_name: university_name,
+      subject_name: subject_name,
+      university_address: {
+        city: university_location?.city,
+        country: university_location?.country,
+      },
+      scholarship_category: scholarship_category,
+      phone: data.phone,
+      addess: data.addess,
+      degree: data.degree,
+      gender: data.gender,
+      ssc: data.ssc,
+      hsc: data.hsc,
+      studyGap: data.studyGap,
+      status: "pending",
+    };
 
-    const formData = new FormData();
-    formData.append("image", data.photo[0]);
-    // upload image to imgbb and get the url
-    const response = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_image_api_key
-      }`,
-      formData
-    );
-
-    if (response.data.success) {
-      // now post the application to the server
-      const applicationData = {
-        userName: user?.displayName,
-        userEmail: user?.email,
-        userPhoto: response.data.data.display_url,
-        scholarship_id: id,
-        date: new Date(),
-        university_name: university_name,
-        subject_name: subject_name,
-        university_address: {
-          city: university_location.city,
-          country: university_location.country,
-        },
-        scholarship_category: scholarship_category,
-        phone: data.phone,
-        addess: data.addess,
-        degree: data.degree,
-        gender: data.gender,
-        ssc: data.ssc,
-        hsc: data.hsc,
-        studyGap: data.studyGap,
-        status: "pending",
-      };
-
-      const applicatonRes = await axiosSecure.post("/apply", applicationData);
-      if (applicatonRes.data.insertedId) {
-        toast.success("Successfully Applied");
-        navigate("/");
-      }
+    const applicatonRes = await axiosSecure.post("/apply", applicationData);
+    if (applicatonRes.data.insertedId) {
+      toast.success("Successfully Applied");
+      navigate("/");
     }
   };
 
@@ -210,30 +195,19 @@ const CheckoutForm = ({
             />
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className=" space-y-2">
-              <label className="font-bold">Your Photo*</label>
-              <input
-                {...register("photo", { required: true })}
-                type="file"
-                placeholder="Upload your photo"
-                className="file-input w-full"
-              />
-            </div>
-            <div className=" space-y-2">
-              <label className="font-bold">Gender*</label>
-              <br />
-              <select
-                {...register("gender", { required: true })}
-                className="select select-bordered w-full"
-              >
-                <option disabled defaultChecked>
-                  Select Your Gender
-                </option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-              </select>
-            </div>
+          <div className=" space-y-2">
+            <label className="font-bold">Gender*</label>
+            <br />
+            <select
+              {...register("gender", { required: true })}
+              className="select select-bordered w-full"
+            >
+              <option disabled defaultChecked>
+                Select Your Gender
+              </option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
           </div>
 
           <div className=" space-y-2">

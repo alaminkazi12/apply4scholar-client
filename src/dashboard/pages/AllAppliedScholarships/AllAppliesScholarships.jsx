@@ -3,7 +3,6 @@ import AllAppliedScholarshipRow from "./AllAppliedScholarshipRow";
 
 const AllAppliesScholarships = () => {
   const [scholarship, refetch] = useAppliedScholarship();
-  console.log(scholarship);
   return (
     <div className="min-h-screen mt-10">
       <h1 className="text-4xl uppercase font-bold text-center mb-4">

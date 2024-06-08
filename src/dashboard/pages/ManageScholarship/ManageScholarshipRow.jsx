@@ -18,7 +18,6 @@ const ManageScholarshipRow = ({ item, refetch }) => {
     service_charge,
     stipend,
     subject_name,
-    university_image,
     university_location,
     university_name,
     _id,
