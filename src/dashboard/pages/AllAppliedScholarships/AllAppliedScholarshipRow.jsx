@@ -1,10 +1,9 @@
 import { VscFeedback } from "react-icons/vsc";
 import useSingleScholarship from "../../../hooks/useSingleScholarship";
 import { useState } from "react";
-import { FaEye, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { ImCancelCircle } from "react-icons/im";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -36,7 +35,7 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
   } = item;
 
   const [scholarship] = useSingleScholarship(scholarship_id);
-  const { application_fees, service_charge, university_location } = scholarship;
+  const { application_fees, service_charge } = scholarship;
 
   //   HANDLE FEEDBACK
 
@@ -102,11 +101,11 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
         <td>{scholarship_name ? scholarship_name : "none"}</td>
         <td>{scholarship_category}</td>
         <td>{subject_category ? subject_category : "none"}</td>
-        <td>{degree}</td>
+        <td className=" capitalize">{degree}</td>
         <td>{application_fees}</td>
         <td>{service_charge}</td>
         <td
-          className={`font-normal ${
+          className={`font-normal capitalize ${
             status === "pending"
               ? "text-yellow-500"
               : status === "processing"
