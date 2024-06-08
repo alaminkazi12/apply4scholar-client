@@ -21,7 +21,6 @@ const ManageScholarships = () => {
               <th>Service Charge</th>
               <th></th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>

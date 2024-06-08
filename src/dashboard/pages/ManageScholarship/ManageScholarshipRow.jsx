@@ -1,10 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { RiDeleteBack2Fill } from "react-icons/ri";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ManageScholarshipRow = ({ item, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const axiosSecure = useAxiosSecure();
   const {
     application_deadline,
     application_fees,
@@ -23,20 +27,80 @@ const ManageScholarshipRow = ({ item, refetch }) => {
   const scholarship_name = `${scholarship_category} at ${university_name}`;
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("image", data.photo[0]);
+    // upload image to imgbb and get the url
+    const response = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_image_api_key
+      }`,
+      formData
+    );
+
     console.log(data);
+    if (response.data.success) {
+      const updatedData = {
+        photo: response.data.data.display_url,
+        application_deadline: data.application_deadline,
+        application_fees: data.application_fees,
+        post_date: data.post_date,
+        scholarship_category: data.scholarship_category,
+        scholarship_description: data.scholarship_description,
+        scholarship_name: data.scholarship_name,
+        service_charge: data.service_charge,
+        stipend: data.stipend,
+        subject_name: data.subject_name,
+        university_location: data.university_location,
+        university_name: data.university_image,
+        id: _id,
+      };
 
-    // send the data to server for update
-    // axiosSecure.put("/review", updatedReview).then((res) => {
-    //   if (res.data.modifiedCount) {
-    //     toast.success("Review Updated Successfully");
-    //     refetch();
-    //   }
-    // });
+      // send the data to server for update
+      axiosSecure.put("/scholarship", updatedData).then((res) => {
+        if (res.data.modifiedCount) {
+          toast.success("Review Updated Successfully");
+          refetch();
+        }
+      });
 
-    // Close the modal after form submission
-    setIsModalOpen(false);
-    reset(); // Reset form fields
+      // Close the modal after form submission
+      setIsModalOpen(false);
+      reset(); // Reset form fields
+    }
+  };
+
+  //   now delte the scholarship
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete("/scholarship", {
+            data: { id: _id },
+          });
+          if (res.data.deletedCount === 1) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Scholarship has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          } else {
+            toast.error("Failed to delete review");
+          }
+        } catch (error) {
+          toast.error("Failed to delete review");
+        }
+      }
+    });
   };
 
   return (
@@ -57,13 +121,11 @@ const ManageScholarshipRow = ({ item, refetch }) => {
           </button>
         </th>
         <th>
-          <button className="btn btn-ghost btn-xs text-red-400">
+          <button
+            onClick={handleDelete}
+            className="btn btn-ghost btn-xs text-red-400"
+          >
             <FaTrash />
-          </button>
-        </th>
-        <th>
-          <button className="btn btn-ghost btn-xs text-red-800">
-            <RiDeleteBack2Fill />
           </button>
         </th>
       </tr>
@@ -174,14 +236,13 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                   <option value="Doctor">Doctor</option>
                 </select>
               </div>
-              <div className="space-y-2">
-                <label className="font-bold">University Image URL*</label>
+              <div className=" space-y-2">
+                <label className="font-bold">Scholarship Image*</label>
                 <input
-                  {...register("university_image", { required: true })}
-                  placeholder="University Image URL"
-                  defaultValue={university_image}
-                  type="text"
-                  className="input input-bordered w-full"
+                  {...register("photo", { required: true })}
+                  type="file"
+                  placeholder="Upload your photo"
+                  className="file-input w-full"
                 />
               </div>
               <div className="space-y-2">
