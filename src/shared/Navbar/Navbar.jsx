@@ -37,7 +37,7 @@ const Navbar = () => {
       {user && (
         <li>
           <NavLink
-            to="/dashboard"
+            to="/dashboard/home"
             className={({ isActive }) =>
               isActive
                 ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
