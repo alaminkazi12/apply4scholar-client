@@ -2,60 +2,62 @@ import { FaRegStar } from "react-icons/fa6";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaDollarSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MdOutlineShareLocation } from "react-icons/md";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
+
 const Card = ({ item }) => {
   console.log(item);
   const {
-    application_deadline,
-    application_fees,
-    reviews,
-    scholarship_category,
     university_name,
     university_image,
+    scholarship_category,
+    application_fees,
+    application_deadline,
+    subject_category,
+    university_country,
+    university_city,
   } = item;
-  const total_rating = reviews?.reduce(
-    (sum, review) => sum + review?.rating_point,
-    0
-  );
-  const averageRating = total_rating / reviews?.length;
 
   return (
-    <div className="p-6 border-2 border-[#FF7A00] rounded-2xl space-y-2">
+    <div className="p-6 border-2 border-[#FF7A00] rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col justify-between h-full">
       <div>
         <img
-          className="rounded-2xl w-full"
+          className="rounded-2xl w-full h-48 object-cover mb-4"
           src={university_image}
           alt={university_name}
         />
       </div>
-      <div className=" space-y-2">
+      <div className="flex-grow space-y-2">
         <h1 className="text-2xl font-bold">{university_name}</h1>
+        <p>
+          <span className="font-bold text-sm">Subject Category: </span>{" "}
+          {subject_category}
+        </p>
         <p>
           <span className="font-bold">Application Deadline:</span>{" "}
           {application_deadline}
         </p>
-        <ul className="flex items-center gap-10 text-lg">
-          {/* <li className="flex items-center gap-2">
-            <MdOutlineShareLocation /> {university_location.country}
-          </li> */}
+        <ul className="flex items-center gap-4 text-lg mt-2">
           <li className="flex items-center gap-2">
-            {" "}
+            <MdOutlineShareLocation /> {university_city}, {university_country}
+          </li>
+          <li className="flex items-center gap-2">
             <BiCategoryAlt /> {scholarship_category}
           </li>
         </ul>
-        <ul className="flex items-center gap-10 text-lg">
+        <ul className="flex items-center gap-4 text-lg mt-2">
           <li className="flex items-center gap-2">
             <FaDollarSign /> {application_fees}
           </li>
           <li className="flex items-center gap-2">
-            <FaRegStar /> {averageRating}
+            <FaRegStar />
           </li>
         </ul>
-        <div className="mt-6 pt-4">
-          <Link to={`/scholarship/${item._id}`}>
-            <PrimaryButton text={"View Details"}></PrimaryButton>
-          </Link>
-        </div>
+      </div>
+      <div className="mt-4">
+        <Link to={`/scholarship/${item._id}`}>
+          <PrimaryButton text={"View Details"} className="w-full" />
+        </Link>
       </div>
     </div>
   );

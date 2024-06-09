@@ -1,12 +1,14 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import { useContext } from "react";
 import useModerator from "../hooks/useModerator";
+import useAdmin from "../hooks/useAdmin";
 
-const ModeratorRoute = ({ children }) => {
+const SharedRoute = ({ children }) => {
   const { loading } = useContext(AuthContext);
   const location = useLocation();
   const [isModerator, isLoading] = useModerator();
+  const [isAdmin] = useAdmin();
 
   if (loading) {
     return (
@@ -23,10 +25,10 @@ const ModeratorRoute = ({ children }) => {
     );
   }
 
-  if (isModerator) {
+  if (isModerator || isAdmin) {
     return children;
   }
   return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
-export default ModeratorRoute;
+export default SharedRoute;

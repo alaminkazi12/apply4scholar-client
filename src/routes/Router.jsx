@@ -20,6 +20,8 @@ import DashRoot from "../dashboard/DashRoot";
 import Payment from "../pages/Payment/Payment";
 import PrivateRouter from "../privateroute/PrivateRouter";
 import ManageAppliedScholarship from "../dashboard/pages/ManageAppliedScholarShip/ManageAppliedScholarship";
+import AdminRoute from "../privateroute/AdminRoute";
+import SharedRoute from "../privateroute/SharedRoute";
 
 const router = createBrowserRouter([
   {
@@ -90,15 +92,33 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manage-scholarship",
-        element: <ManageScholarships></ManageScholarships>,
+        element: (
+          <PrivateRouter>
+            <SharedRoute>
+              <ManageScholarships></ManageScholarships>
+            </SharedRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/manage-reviews",
-        element: <ManageReview></ManageReview>,
+        element: (
+          <PrivateRouter>
+            <AdminRoute>
+              <ManageReview></ManageReview>
+            </AdminRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <PrivateRouter>
+            <AdminRoute>
+              <ManageUsers></ManageUsers>
+            </AdminRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/all-applied-scholarship",

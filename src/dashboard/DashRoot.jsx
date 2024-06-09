@@ -11,12 +11,17 @@ import { MdDashboard } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useModerator from "../hooks/useModerator";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import { BiExit } from "react-icons/bi";
 
 const DashRoot = () => {
+  const { logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
-  const [isModarator] = useModerator();
-  console.log(isModarator);
-  console.log(!isAdmin);
+  const [isModerator] = useModerator();
+
+  console.log(isAdmin);
+  console.log("moderator", isModerator);
   const navlinks = (
     <>
       <li>
@@ -46,7 +51,7 @@ const DashRoot = () => {
         </NavLink>
       </li>
 
-      {!isAdmin && !isModarator && (
+      {!isAdmin && !isModerator && (
         <li>
           <NavLink
             to="/dashboard/my-reviews"
@@ -61,7 +66,7 @@ const DashRoot = () => {
           </NavLink>
         </li>
       )}
-      {!isAdmin && !isModarator && (
+      {!isAdmin && !isModerator && (
         <li>
           <NavLink
             to="/dashboard/my-application"
@@ -90,7 +95,7 @@ const DashRoot = () => {
           PROFILE
         </NavLink>
       </li>
-      {(isAdmin || isModarator) && (
+      {(isAdmin || isModerator) && (
         <li>
           <NavLink
             to="/dashboard/add-scholarship"
@@ -105,7 +110,7 @@ const DashRoot = () => {
           </NavLink>
         </li>
       )}
-      {(isAdmin || isModarator) && (
+      {(isAdmin || isModerator) && (
         <li>
           <NavLink
             to="/dashboard/manage-scholarship"
@@ -135,7 +140,7 @@ const DashRoot = () => {
           </NavLink>
         </li>
       )}
-      {isModarator && (
+      {isModerator && (
         <li>
           <NavLink
             to="/dashboard/all-applied-scholarship"
@@ -165,7 +170,7 @@ const DashRoot = () => {
           </NavLink>
         </li>
       )}
-      {isModarator && (
+      {isModerator && (
         <li>
           <NavLink
             to="/dashboard/all-reviews"
@@ -195,6 +200,15 @@ const DashRoot = () => {
           </NavLink>
         </li>
       )}
+      <li>
+        <button
+          onClick={() => logOut()}
+          className="btn btn-warning bg-orange-700 outline-none border-none mt-4"
+        >
+          <BiExit />
+          LOG OUT
+        </button>
+      </li>
     </>
   );
 

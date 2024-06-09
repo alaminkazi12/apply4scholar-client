@@ -2,6 +2,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import SectionTitle from "../../../shared/sectionTitle/SectionTitle";
 import { useEffect, useState } from "react";
 import Card from "./Card";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const TopScholarshops = () => {
   const axiosPublic = useAxiosPublic();
@@ -25,6 +27,11 @@ const TopScholarshops = () => {
         {topScholarships.map((item) => (
           <Card item={item} key={item._id}></Card>
         ))}
+      </div>
+      <div className="flex justify-center items-center my-10">
+        <Link to="/all-scholarsips">
+          <PrimaryButton text={"Explore more"}></PrimaryButton>
+        </Link>
       </div>
     </div>
   );

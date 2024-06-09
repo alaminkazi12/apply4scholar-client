@@ -10,20 +10,21 @@ const ManageScholarshipRow = ({ item, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
   const {
-    application_deadline,
-    application_fees,
-    post_date,
-    scholarship_category,
-    scholarship_description,
-    service_charge,
-    stipend,
-    subject_name,
-    university_location,
+    scholarship_name,
     university_name,
+    university_country,
+    university_city,
+    university_world_rank,
+    subject_category,
+    scholarship_category,
+    tuition_fees,
+    application_fees,
+    service_charge,
+    application_deadline,
+    post_date,
+    scholarship_description,
     _id,
   } = item;
-
-  const scholarship_name = `${scholarship_category} at ${university_name}`;
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
@@ -40,19 +41,22 @@ const ManageScholarshipRow = ({ item, refetch }) => {
     console.log(data);
     if (response.data.success) {
       const updatedData = {
-        photo: response.data.data.display_url,
-        application_deadline: data.application_deadline,
-        application_fees: data.application_fees,
-        post_date: data.post_date,
-        scholarship_category: data.scholarship_category,
-        scholarship_description: data.scholarship_description,
-        scholarship_name: data.scholarship_name,
-        service_charge: data.service_charge,
-        stipend: data.stipend,
-        subject_name: data.subject_name,
-        university_location: data.university_location,
-        university_name: data.university_image,
         id: _id,
+        scholarship_name: data.scholarship_name,
+        university_name: data.university_name,
+        university_image: response.data.data.display_url,
+        university_country: data.university_country,
+        university_city: data.university_city,
+        university_world_rank: data.university_world_rank,
+        subject_category: data.subject_category,
+        scholarship_category: data.scholarship_category,
+        degree: data.degree,
+        tuition_fees: data.tuition_fees,
+        application_fees: data.application_fees,
+        service_charge: data.service_charge,
+        application_deadline: data.application_deadline,
+        post_date: data.post_date,
+        scholarship_description: data.scholarship_description,
       };
 
       // send the data to server for update
@@ -172,6 +176,16 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                 />
               </div>
               <div className="space-y-2">
+                <label className="font-bold">University World Rank*</label>
+                <input
+                  {...register("university_world_rank", { required: true })}
+                  placeholder="University World Rank"
+                  defaultValue={university_world_rank}
+                  type="text"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="space-y-2">
                 <label className="font-bold">Scholarship Category*</label>
                 <select
                   {...register("scholarship_category", { required: true })}
@@ -214,21 +228,21 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold">Stipend*</label>
+                <label className="font-bold">Tuition Fees*</label>
                 <input
-                  {...register("stipend", { required: true })}
+                  {...register("tuition_fees", { required: true })}
                   placeholder="Stipend"
-                  defaultValue={stipend}
+                  defaultValue={tuition_fees}
                   type="text"
                   className="input input-bordered w-full"
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold">Subject Name*</label>
+                <label className="font-bold">Subject Category*</label>
                 <select
-                  {...register("subject_name", { required: true })}
+                  {...register("subject_category", { required: true })}
                   className="input input-bordered w-full"
-                  defaultValue={subject_name}
+                  defaultValue={subject_category}
                 >
                   <option value="Agriculture">Agriculture</option>
                   <option value="Engineering">Engineering</option>
@@ -249,12 +263,35 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                   University Location (City, Country)*
                 </label>
                 <input
-                  {...register("university_location", { required: true })}
-                  placeholder="City, Country"
-                  defaultValue={`${university_location.city}, ${university_location.country}`}
+                  {...register("university_city", { required: true })}
+                  placeholder="University City"
+                  defaultValue={university_city}
                   type="text"
                   className="input input-bordered w-full"
                 />
+              </div>
+              <div className="space-y-2">
+                <label className="font-bold">
+                  University Location (City, Country)*
+                </label>
+                <input
+                  {...register("university_country", { required: true })}
+                  placeholder="University Country"
+                  defaultValue={university_country}
+                  type="text"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="font-bold">Degree:*</label>
+                <select
+                  {...register("degree", { required: true })}
+                  className="input input-bordered w-full"
+                >
+                  <option value="Diploma">Diploma</option>
+                  <option value="Bachelor">Bachelor</option>
+                  <option value="Masters">Masters</option>
+                </select>
               </div>
               <div className="space-y-2">
                 <label className="font-bold">Post Date*</label>
