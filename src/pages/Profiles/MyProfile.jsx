@@ -14,6 +14,7 @@ const MyProfile = () => {
   }, [axiosSecure, user]);
 
   const { role, userEmail, userName } = dbUsr;
+  console.log(dbUsr);
 
   return (
     <div className="min-h-screen mt-10 flex flex-col items-center justify-center bg-gray-100 rounded-xl p-6 uppercase">

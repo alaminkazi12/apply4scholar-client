@@ -2,7 +2,7 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
@@ -14,6 +14,7 @@ const Login = () => {
   const [signInError, setupSignInError] = useState("");
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -32,6 +33,17 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+
+          const userInfo = {
+            userName: user.displayName,
+            userEmail: user.email,
+            role: "user",
+          };
+
+          axiosPublic.post("/users", userInfo).then((res) => {
+            console.log(res);
+          });
+
           toast.success("Logged In Successfully!", {
             position: "top-right",
           });

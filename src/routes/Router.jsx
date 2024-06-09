@@ -62,7 +62,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashRoot></DashRoot>,
+    element: (
+      <PrivateRouter>
+        <DashRoot></DashRoot>
+      </PrivateRouter>
+    ),
     children: [
       {
         path: "/dashboard/home",
@@ -70,7 +74,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/profile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRouter>
+            <MyProfile></MyProfile>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/update-profile",

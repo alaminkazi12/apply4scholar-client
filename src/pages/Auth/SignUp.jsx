@@ -103,7 +103,7 @@ const SignUp = () => {
           // create user entry in the database
           const userInfo = {
             userName: name,
-            userEmail: email,
+            userEmail: email.toLowerCase(),
             role: "user",
           };
           console.log(userInfo);

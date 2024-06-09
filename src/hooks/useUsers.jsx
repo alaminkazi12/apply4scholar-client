@@ -3,6 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   // tan stack query
   const { data: users = [], refetch } = useQuery({
     queryKey: ["user"],
