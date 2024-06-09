@@ -9,8 +9,11 @@ import {
 } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const DashRoot = () => {
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   const navlinks = (
     <>
       <li>
@@ -78,46 +81,53 @@ const DashRoot = () => {
           PROFILE
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard/add-scholarship"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
-              : "text-white"
-          }
-        >
-          <FaPlus />
-          ADD SCHOLARSHIP
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/manage-scholarship"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
-              : "text-white"
-          }
-        >
-          <FaGraduationCap />
-          MANAGE SCHOLARSHIP
-        </NavLink>
-      </li>
+      {isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/add-scholarship"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+                : "text-white"
+            }
+          >
+            <FaPlus />
+            ADD SCHOLARSHIP
+          </NavLink>
+        </li>
+      )}
 
-      <li>
-        <NavLink
-          to="/dashboard/manage-applied-scholarship"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
-              : "text-white"
-          }
-        >
-          <FaEnvelopeOpen />
-          MANAGE APPLIED APPLICATION
-        </NavLink>
-      </li>
+      {isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/manage-scholarship"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+                : "text-white"
+            }
+          >
+            <FaGraduationCap />
+            MANAGE SCHOLARSHIP
+          </NavLink>
+        </li>
+      )}
+
+      {isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/manage-applied-scholarship"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+                : "text-white"
+            }
+          >
+            <FaEnvelopeOpen />
+            MANAGE APPLIED APPLICATION
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/dashboard/all-applied-scholarship"
@@ -131,19 +141,21 @@ const DashRoot = () => {
           ALL APPLIED APPLICATION
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard/manage-users"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
-              : "text-white"
-          }
-        >
-          <FaPeopleGroup />
-          MANAGE USERS
-        </NavLink>
-      </li>
+      {isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/manage-users"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+                : "text-white"
+            }
+          >
+            <FaPeopleGroup />
+            MANAGE USERS
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/dashboard/all-reviews"
@@ -157,19 +169,21 @@ const DashRoot = () => {
           All REVIEWS
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard/manage-reviews"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
-              : "text-white"
-          }
-        >
-          <FaStar />
-          MANAGE REVIEW
-        </NavLink>
-      </li>
+      {isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/manage-reviews"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold bg-[#1A73E8] text-[16px] text-white py-3 rounded-md hover:bg-black"
+                : "text-white"
+            }
+          >
+            <FaStar />
+            MANAGE REVIEW
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
