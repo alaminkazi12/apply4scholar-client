@@ -16,7 +16,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
-              : ""
+              : "text-white hover:text-[#1A73E8] hover:bg-white px-4 py-2 rounded-lg transition-all duration-300"
           }
         >
           Home
@@ -28,10 +28,10 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
-              : ""
+              : "text-white hover:text-[#1A73E8] hover:bg-white px-4 py-2 rounded-lg transition-all duration-300"
           }
         >
-          All Scholarship
+          All Scholarships
         </NavLink>
       </li>
       {user && (
@@ -41,7 +41,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               isActive
                 ? "font-bold text-[#1A73E8] border-b-2 border-b-[#1A73E8]"
-                : ""
+                : "text-white hover:text-[#1A73E8] hover:bg-white px-4 py-2 rounded-lg transition-all duration-300"
             }
           >
             Dashboard
@@ -70,7 +70,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 uppercase"
           >
             {navlinks}
           </ul>
@@ -81,7 +81,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-white">{navlinks}</ul>
       </div>
       <div className="navbar-end">
-        <ul className="menu menu-horizontal px-2 text-white hidden lg:flex">
+        <ul className="menu menu-horizontal px-2 text-white hidden lg:flex uppercase text-md">
           {navlinks}
         </ul>
         <div>
