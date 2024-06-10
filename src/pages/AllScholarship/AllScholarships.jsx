@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PageTitle from "../../shared/PageTitle/PageTitle";
 import Card from "../Home/TopScholarships/Card";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
