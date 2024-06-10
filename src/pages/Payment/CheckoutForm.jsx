@@ -11,9 +11,10 @@ const CheckoutForm = ({
   fee,
   id,
   scholarship_category,
-  subject_name,
+  subject_category,
   university_name,
-  university_location,
+  university_country,
+  university_city,
 }) => {
   const [error, setError] = useState("");
   const [tnxid, setTnxid] = useState("");
@@ -108,11 +109,9 @@ const CheckoutForm = ({
       scholarship_id: id,
       date: new Date(),
       university_name: university_name,
-      subject_name: subject_name,
-      university_address: {
-        city: university_location?.city,
-        country: university_location?.country,
-      },
+      subject_category: subject_category,
+      university_city: university_city,
+      university_country: university_country,
       scholarship_category: scholarship_category,
       phone: data.phone,
       addess: data.addess,
@@ -301,13 +300,13 @@ const CheckoutForm = ({
             />
           </div>
           <div className=" space-y-2">
-            <label className="font-bold">Subject Name</label>
+            <label className="font-bold">Subject Category</label>
             <input
-              defaultValue={subject_name}
+              defaultValue={subject_category}
               disabled
               {...register("subjectCategory")}
               type="text"
-              placeholder={subject_name}
+              placeholder={subject_category}
               className="input input-bordered w-full"
             />
           </div>

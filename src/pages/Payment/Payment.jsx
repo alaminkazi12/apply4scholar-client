@@ -15,7 +15,9 @@ const Payment = () => {
     scholarship_category,
     subject_name,
     university_name,
-    university_location,
+    subject_category,
+    university_country,
+    university_city,
   } = scholarship;
   const fee = parseInt(application_fees?.replace("$", "")) || 0;
   console.log(subject_name, scholarship_category);
@@ -34,7 +36,9 @@ const Payment = () => {
             scholarship_category={scholarship_category}
             subject_name={subject_name}
             university_name={university_name}
-            university_location={university_location}
+            subject_category={subject_category}
+            university_country={university_country}
+            university_city={university_city}
           ></CheckoutForm>
         </Elements>
       </div>

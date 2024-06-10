@@ -23,6 +23,7 @@ const ManageScholarshipRow = ({ item, refetch }) => {
     application_deadline,
     post_date,
     scholarship_description,
+    university_image,
     _id,
   } = item;
 
@@ -62,7 +63,7 @@ const ManageScholarshipRow = ({ item, refetch }) => {
       // send the data to server for update
       axiosSecure.put("/scholarship", updatedData).then((res) => {
         if (res.data.modifiedCount) {
-          toast.success("Review Updated Successfully");
+          toast.success("Scholarship Updated Successfully");
           refetch();
         }
       });
@@ -250,12 +251,13 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                 </select>
               </div>
               <div className=" space-y-2">
-                <label className="font-bold">Scholarship Image*</label>
+                <label className="font-bold">Scholarship Image</label>
                 <input
-                  {...register("photo", { required: true })}
+                  {...register("photo")}
                   type="file"
                   placeholder="Upload your photo"
                   className="file-input w-full"
+                  defaultValue={university_image}
                 />
               </div>
               <div className="space-y-2">
