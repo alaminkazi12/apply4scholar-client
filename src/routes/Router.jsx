@@ -72,7 +72,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/home",
-        element: <Dashboard></Dashboard>,
+        element: (
+          <PrivateRouter>
+            <Dashboard></Dashboard>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/profile",
@@ -84,11 +88,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/update-profile",
-        element: <UpdateProfile></UpdateProfile>,
+        element: (
+          <PrivateRouter>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/add-scholarship",
-        element: <AddScholarship></AddScholarship>,
+        element: (
+          <PrivateRouter>
+            <SharedRoute>
+              <AddScholarship></AddScholarship>
+            </SharedRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/manage-scholarship",
@@ -122,23 +136,47 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/all-applied-scholarship",
-        element: <AllAppliesScholarships></AllAppliesScholarships>,
+        element: (
+          <PrivateRouter>
+            <AllAppliesScholarships></AllAppliesScholarships>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/manage-applied-scholarship",
-        element: <ManageAppliedScholarship></ManageAppliedScholarship>,
+        element: (
+          <PrivateRouter>
+            <SharedRoute>
+              <ManageAppliedScholarship></ManageAppliedScholarship>
+            </SharedRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/all-reviews",
-        element: <AllReviews></AllReviews>,
+        element: (
+          <PrivateRouter>
+            <SharedRoute>
+              <AllReviews></AllReviews>
+            </SharedRoute>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/my-application",
-        element: <MyApplication></MyApplication>,
+        element: (
+          <PrivateRouter>
+            <MyApplication></MyApplication>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/my-reviews",
-        element: <MyReviews></MyReviews>,
+        element: (
+          <PrivateRouter>
+            <MyReviews></MyReviews>
+          </PrivateRouter>
+        ),
       },
     ],
   },

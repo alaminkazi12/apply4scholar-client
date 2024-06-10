@@ -21,7 +21,6 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
     scholarship_id,
     date,
     university_name,
-    subject_name,
     scholarship_category,
     scholarship_name,
     subject_category,
@@ -269,7 +268,8 @@ const AllAppliedScholarshipRow = ({ item, refetch }) => {
                     <span className="font-normal">{university_name}</span>
                   </p>
                   <p className="font-semibold">
-                    Subject: <span className="font-normal">{subject_name}</span>
+                    Subject:{" "}
+                    <span className="font-normal">{subject_category}</span>
                   </p>
                   <p className="font-semibold">
                     Scholarship Category:{" "}
