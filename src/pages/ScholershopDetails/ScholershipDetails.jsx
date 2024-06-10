@@ -37,7 +37,7 @@ const ScholershipDetails = () => {
   return (
     <div>
       <Helmet>
-        <title>{scholarship_name} | Apply4Scholar </title>
+        <title> {`${scholarship_name} | Apply4Scholar`} </title>
       </Helmet>
       <PageTitle
         title={scholarship_name}

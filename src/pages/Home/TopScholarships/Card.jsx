@@ -4,6 +4,7 @@ import { FaDollarSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdOutlineShareLocation } from "react-icons/md";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import useSholarshipReveiw from "../../../hooks/useSholarshipReveiw";
 
 const Card = ({ item }) => {
   console.log(item);
@@ -16,7 +17,18 @@ const Card = ({ item }) => {
     subject_category,
     university_country,
     university_city,
+    _id,
   } = item;
+
+  const [ScholarshipReviews] = useSholarshipReveiw(_id);
+  const totalRating = ScholarshipReviews.reduce(
+    (sum, review) => sum + parseFloat(review.rating),
+    0
+  );
+
+  // Calculate average rating
+  const avgRating =
+    ScholarshipReviews.length > 0 ? totalRating / ScholarshipReviews.length : 0;
 
   return (
     <div className=" p-3 md:p-6 border-2 border-[#FF7A00] rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col justify-between h-full">
@@ -50,7 +62,7 @@ const Card = ({ item }) => {
             <FaDollarSign /> {application_fees}
           </li>
           <li className="flex items-center gap-2">
-            <FaRegStar />
+            <FaRegStar /> {avgRating}
           </li>
         </ul>
       </div>

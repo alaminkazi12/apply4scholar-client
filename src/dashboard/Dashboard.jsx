@@ -11,7 +11,6 @@ import useAdmin from "../hooks/useAdmin";
 import useModerator from "../hooks/useModerator";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import MyReviews from "./pages/MyReviews/MyReviews";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -166,7 +165,7 @@ const Dashboard = () => {
                 <h4 className="text-2xl md:text-4xl uppercase text-center">
                   My reviews
                 </h4>
-                <h5 className="text-4xl md:text-5xl">{MyReviews.length}</h5>
+                <h5 className="text-4xl md:text-5xl">{userReviews.length}</h5>
               </div>
             </div>
           </div>

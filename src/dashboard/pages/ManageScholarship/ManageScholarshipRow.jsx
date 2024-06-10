@@ -23,7 +23,6 @@ const ManageScholarshipRow = ({ item, refetch }) => {
     application_deadline,
     post_date,
     scholarship_description,
-    university_image,
     _id,
   } = item;
 
@@ -257,7 +256,6 @@ const ManageScholarshipRow = ({ item, refetch }) => {
                   type="file"
                   placeholder="Upload your photo"
                   className="file-input w-full"
-                  defaultValue={university_image}
                 />
               </div>
               <div className="space-y-2">

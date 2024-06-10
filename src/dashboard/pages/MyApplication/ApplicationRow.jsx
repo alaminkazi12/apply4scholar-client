@@ -29,7 +29,13 @@ const ApplicationRow = ({ item, refetch }) => {
   } = item;
 
   const [scholarship] = useSingleScholarship(scholarship_id);
-  const { application_fees, service_charge, university_location } = scholarship;
+  const {
+    application_fees,
+    service_charge,
+    university_city,
+    university_country,
+    scholarship_name,
+  } = scholarship;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -46,6 +52,7 @@ const ApplicationRow = ({ item, refetch }) => {
       userName: user?.displayName,
       userImage: user?.photoURL,
       scholarship_id: scholarship_id,
+      scholarship_name: scholarship_name,
     };
     //    post the review to the db
     axiosSecure.post("/review", reveiwData).then((res) => {
@@ -127,8 +134,8 @@ const ApplicationRow = ({ item, refetch }) => {
       <tr>
         <td>{university_name}</td>
         <td className="flex items-center">
-          <span>{university_location?.city}, </span>
-          <span> {university_location?.country}</span>
+          <span>{university_city}, </span>
+          <span> {university_country}</span>
         </td>
         <td>{subject_name}</td>
         <td>{scholarship_category}</td>
