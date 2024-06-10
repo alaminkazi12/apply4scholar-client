@@ -12,43 +12,43 @@ const ContactUs = () => {
       }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-      <div className="relative z-10 py-12">
+      <div className="relative z-10 md:py-12">
         <SectionTitle
           heading={"Contact Us"}
           subheading={"We're here to help! Reach out to us with any concerns"}
         />
 
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-60">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-60">
             {/* Contact Info Section */}
-            <div className="text-white space-y-6 border-2 border-yellow-500 p-16 rounded-xl">
+            <div className="text-white space-y-6 border-2 border-yellow-500 p-4 md:p-16 rounded-xl">
               <div className="flex items-center space-x-4">
-                <FaPhoneAlt className="text-3xl text-yellow-500" />
+                <FaPhoneAlt className="md:text-3xl text-yellow-500" />
                 <div>
-                  <h4 className="text-xl font-bold">Call Us</h4>
+                  <h4 className="md:text-xl font-bold">Call Us</h4>
                   <p>+123 456 7890</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <FaEnvelope className="text-3xl text-yellow-500" />
+                <FaEnvelope className="md:text-3xl text-yellow-500" />
                 <div>
-                  <h4 className="text-xl font-bold">Email Us</h4>
+                  <h4 className="md:text-xl font-bold">Email Us</h4>
                   <p>contact@example.com</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <FaMapMarkerAlt className="text-3xl text-yellow-500" />
+                <FaMapMarkerAlt className="md:text-3xl text-yellow-500" />
                 <div>
-                  <h4 className="text-xl font-bold">Visit Us</h4>
+                  <h4 className="md:text-xl font-bold">Visit Us</h4>
                   <p>123 Street, City, Country</p>
                 </div>
               </div>
             </div>
 
             {/* Contact Form Section */}
-            <div className="bg-white rounded-lg shadow-lg p-8 md:p-16">
+            <div className="bg-white rounded-lg shadow-lg  p-4 md:p-16">
               <form className="space-y-6">
                 <label className="form-control w-full">
                   <div className="label">
@@ -79,7 +79,7 @@ const ContactUs = () => {
                     placeholder="Type your message here"
                     className="textarea textarea-bordered"
                     rows="5"
-                    cols="50"
+                    cols="40"
                   ></textarea>
                 </label>
 

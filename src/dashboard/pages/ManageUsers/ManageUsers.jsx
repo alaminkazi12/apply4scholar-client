@@ -17,13 +17,13 @@ const ManageUsers = () => {
       <Helmet>
         <title> Manage Users | Apply4Scholar </title>
       </Helmet>
-      <h1 className="text-4xl uppercase font-bold text-center mb-4">
+      <h1 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14 w-[80%] mx-auto">
         MANAGE USERS
       </h1>
       <div className="flex justify-center mb-4 uppercase">
         <select
           onChange={handleShort}
-          className="select select-success w-full max-w-xs uppercase"
+          className="select select-success md:w-full  max-w-xs uppercase"
         >
           <option disabled selected>
             Short By Role

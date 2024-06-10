@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useScholarship from "../../../hooks/useScholarship";
 import ManageScholarshipRow from "./ManageScholarshipRow";
 
@@ -6,7 +7,10 @@ const ManageScholarships = () => {
   console.log(scholarship);
   return (
     <div className="min-h-screen mt-10">
-      <h1 className="text-4xl uppercase font-bold text-center mb-4">
+      <Helmet>
+        <title> Manage Scholarship | Apply4Scholar </title>
+      </Helmet>
+      <h1 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14 w-[80%] mx-auto">
         Manage Scholarship
       </h1>
       <div className="overflow-x-auto max-w-[1000px] border-2 p-6 rounded-xl shadow-xl">

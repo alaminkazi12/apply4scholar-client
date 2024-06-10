@@ -2,10 +2,10 @@ import useAppliedScholarship from "../../../hooks/useAppliedScholarship";
 import AllAppliedScholarshipRow from "./AllAppliedScholarshipRow";
 
 const AllAppliesScholarships = () => {
-  const [scholarship, refetch] = useAppliedScholarship();
+  const [appliedScholarship, refetch] = useAppliedScholarship();
   return (
     <div className="min-h-screen mt-10">
-      <h1 className="text-4xl uppercase font-bold text-center mb-4">
+      <h1 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14">
         ALL APPLIED APLLICATION
       </h1>
       <div className="overflow-x-auto max-w-[1000px] border-2 p-6 rounded-xl shadow-xl">
@@ -27,7 +27,7 @@ const AllAppliesScholarships = () => {
             </tr>
           </thead>
           <tbody>
-            {scholarship.map((item, idx) => (
+            {appliedScholarship.map((item, idx) => (
               <AllAppliedScholarshipRow
                 key={idx}
                 item={item}

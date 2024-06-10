@@ -66,7 +66,7 @@ const FAQ = () => {
                 } bg-white rounded-lg p-4 cursor-pointer`}
                 onClick={() => toggleAnswer(index)}
               >
-                <div className="text-xl font-medium flex justify-between items-center">
+                <div className="md:text-xl font-medium flex justify-between items-center uppercase">
                   <span>{item.question}</span>
                   <span
                     className={`transform transition-transform duration-300 ${

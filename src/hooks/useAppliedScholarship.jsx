@@ -4,14 +4,14 @@ import useAxiosPublic from "./useAxiosPublic";
 const useAppliedScholarship = () => {
   const axiosPublic = useAxiosPublic();
   // tan stack query
-  const { data: scholarship = [], refetch } = useQuery({
-    queryKey: ["scholarship"],
+  const { data: appliedScholarship = [], refetch } = useQuery({
+    queryKey: ["appliedScholarship"],
     queryFn: async () => {
       const res = await axiosPublic.get("/all-applied-scholarships");
       return res.data;
     },
   });
-  return [scholarship, refetch];
+  return [appliedScholarship, refetch];
 };
 
 export default useAppliedScholarship;

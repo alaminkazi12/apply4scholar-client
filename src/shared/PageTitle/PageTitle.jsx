@@ -7,9 +7,11 @@ const PageTitle = ({ title, subtitle }) => {
       style={{ backgroundImage: `url(${img})` }}
     >
       <div className="absolute inset-0 bg-black opacity-50 rounded-xl"></div>
-      <div className="relative z-10 text-center">
-        <h1 className="text-5xl font-bold mb-2 uppercase">{title}</h1>
-        {subtitle && <p className="text-xl uppercase">{subtitle}</p>}
+      <div className="relative z-9 text-center px-4">
+        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-2 uppercase">
+          {title}
+        </h1>
+        {subtitle && <p className="text-sm md:text-xl uppercase">{subtitle}</p>}
       </div>
     </div>
   );

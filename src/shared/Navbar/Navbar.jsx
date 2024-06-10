@@ -58,7 +58,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="navbar fixed z-10 max-w-[1440px] bg-[#F5F5F5] bg-opacity-0">
+    <div className="navbar fixed z-10 max-w-[1440px] bg-black bg-opacity-15">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -70,18 +70,20 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 uppercase"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52 uppercase"
           >
             {navlinks}
           </ul>
         </div>
-        <img src={logo} alt="apply4scholar logo" />
+        <Link to="/">
+          <img src={logo} alt="apply4scholar logo" />
+        </Link>
       </div>
       <div className="navbar-center hidden">
         <ul className="menu menu-horizontal px-1 text-white">{navlinks}</ul>
       </div>
       <div className="navbar-end">
-        <ul className="menu menu-horizontal px-2 text-white hidden lg:flex uppercase text-md">
+        <ul className="menu menu-horizontal px-2 text-black hidden lg:flex uppercase text-md">
           {navlinks}
         </ul>
         <div>

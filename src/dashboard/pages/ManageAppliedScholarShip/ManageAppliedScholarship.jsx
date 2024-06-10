@@ -3,14 +3,14 @@ import useAppliedScholarship from "../../../hooks/useAppliedScholarship";
 import AllAppliedScholarshipRow from "../AllAppliedScholarships/AllAppliedScholarshipRow";
 
 const ManageAppliedScholarship = () => {
-  const [scholarship, refetch] = useAppliedScholarship();
+  const [appliedScholarship, refetch] = useAppliedScholarship();
   return (
     <div className="min-h-screen mt-10">
       <Helmet>
         <title> Manage Applied Scholarships | Apply4Scholar </title>
       </Helmet>
-      <h1 className="text-4xl uppercase font-bold text-center mb-4">
-        MANAGE APPLIED SCHOLARSHIPS
+      <h1 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14 w-[80%] mx-auto">
+        MANAGE APPLIED <br /> SCHOLARSHIPS
       </h1>
       <div className="overflow-x-auto max-w-[1000px] border-2 p-6 rounded-xl shadow-xl">
         <table className="table">
@@ -31,7 +31,7 @@ const ManageAppliedScholarship = () => {
             </tr>
           </thead>
           <tbody>
-            {scholarship.map((item, idx) => (
+            {appliedScholarship.map((item, idx) => (
               <AllAppliedScholarshipRow
                 key={idx}
                 item={item}

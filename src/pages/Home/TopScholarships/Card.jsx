@@ -19,7 +19,7 @@ const Card = ({ item }) => {
   } = item;
 
   return (
-    <div className="p-6 border-2 border-[#FF7A00] rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col justify-between h-full">
+    <div className=" p-3 md:p-6 border-2 border-[#FF7A00] rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col justify-between h-full">
       <div>
         <img
           className="rounded-2xl w-full h-48 object-cover mb-4"
@@ -28,7 +28,7 @@ const Card = ({ item }) => {
         />
       </div>
       <div className="flex-grow space-y-2">
-        <h1 className="text-2xl font-bold">{university_name}</h1>
+        <h1 className="text-xl md:text-2xl font-bold">{university_name}</h1>
         <p>
           <span className="font-bold text-sm">Subject Category: </span>{" "}
           {subject_category}

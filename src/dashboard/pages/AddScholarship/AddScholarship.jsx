@@ -52,7 +52,7 @@ const AddScholarship = () => {
       <Helmet>
         <title> Add Scholarship | Apply4Scholar </title>
       </Helmet>
-      <h2 className="text-center text-4xl mb-4 uppercase font-bold">
+      <h2 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14">
         ADD SCHOLARSHIP
       </h2>
       <div>

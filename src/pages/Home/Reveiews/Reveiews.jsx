@@ -13,7 +13,7 @@ const Reveiews = () => {
           "Hear from students about their experiences and success stories"
         }
       ></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4">
         {limitedReviews.map((item, idx) => (
           <ReveiwCard key={idx} item={item}></ReveiwCard>
         ))}

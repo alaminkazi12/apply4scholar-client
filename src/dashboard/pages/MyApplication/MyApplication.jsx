@@ -45,7 +45,7 @@ const MyApplication = () => {
       <Helmet>
         <title> My Applications | Apply4Scholar </title>
       </Helmet>
-      <h1 className="text-4xl uppercase font-bold text-center mb-4">
+      <h1 className="text-xl md:text-4xl uppercase font-bold text-center mb-4 mt-14 w-[80%] mx-auto">
         My Application
       </h1>
       <div className="overflow-x-auto max-w-[1000px] border-2 p-6 rounded-xl shadow-xl">
