@@ -1,12 +1,15 @@
+import { Helmet } from "react-helmet-async";
 import useReviews from "../../../hooks/useReviews";
 import ReviewCard from "../AllReviews/ReviewCard";
-import ManageReviewCard from "./ManageReviewCard";
 
 const ManageReview = () => {
   const [reviews, refetch] = useReviews();
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> Manage Reviews | Apply4Scholar </title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-4">
         Manage Reviews
       </h1>

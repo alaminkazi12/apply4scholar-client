@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useUsers from "../../../hooks/useUsers";
 import UserRow from "./UserRow";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const [role, setRole] = useState("");
@@ -13,6 +14,9 @@ const ManageUsers = () => {
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> Manage Users | Apply4Scholar </title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-4">
         MANAGE USERS
       </h1>

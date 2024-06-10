@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const CheckoutForm = ({
   fee,
@@ -132,6 +133,9 @@ const CheckoutForm = ({
 
   return (
     <div>
+      <Helmet>
+        <title>Checkout | Apply4Scholar.com</title>
+      </Helmet>
       {!isPaymentSuccessful && (
         <form
           className="md:w-[500px] shadow-xl flex flex-col mx-auto space-y-10 mt-10 border-2 p-6 rounded-xl"

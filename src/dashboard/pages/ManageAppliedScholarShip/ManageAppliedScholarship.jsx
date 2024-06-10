@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useAppliedScholarship from "../../../hooks/useAppliedScholarship";
 import AllAppliedScholarshipRow from "../AllAppliedScholarships/AllAppliedScholarshipRow";
 
@@ -5,6 +6,9 @@ const ManageAppliedScholarship = () => {
   const [scholarship, refetch] = useAppliedScholarship();
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> Manage Applied Scholarships | Apply4Scholar </title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-4">
         MANAGE APPLIED SCHOLARSHIPS
       </h1>

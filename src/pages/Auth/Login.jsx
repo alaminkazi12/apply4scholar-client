@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { login, googleLogin, gitHubLogin } = useContext(AuthContext);
@@ -104,6 +105,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title> Login | Apply4Scholar </title>
+      </Helmet>
       <PageTitle
         title={"Login"}
         subtitle={"Already Have An Account? Please login.. "}

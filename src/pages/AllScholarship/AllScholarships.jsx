@@ -3,6 +3,7 @@ import PageTitle from "../../shared/PageTitle/PageTitle";
 import Card from "../Home/TopScholarships/Card";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { FaSearch } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const AllScholarships = () => {
   const axiosPublic = useAxiosPublic();
@@ -35,6 +36,9 @@ const AllScholarships = () => {
 
   return (
     <div>
+      <Helmet>
+        <title> All Scholarships | Apply4Scholar </title>
+      </Helmet>
       <PageTitle
         title={"All Scholarships"}
         subtitle={"Explore Scholarships to Fuel Your Future"}

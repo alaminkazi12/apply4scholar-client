@@ -3,6 +3,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import ReviewCard from "./ReviewCard";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -33,6 +34,9 @@ const MyReviews = () => {
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> My Reviews | Apply4Scholar </title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-4">
         My Reviews
       </h1>

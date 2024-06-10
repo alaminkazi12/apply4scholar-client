@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 import useSingleScholarship from "../../hooks/useSingleScholarship";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_stripe_key);
 
@@ -24,6 +25,9 @@ const Payment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Payment | Apply4Scholar.com</title>
+      </Helmet>
       <PageTitle
         title={"Checkout"}
         subtitle={"Pay and apply your favorite scholarship"}

@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper/modules";
 import ReviewCard from "../Home/Reveiews/ReveiwCard";
 import "swiper/css/bundle";
+import { Helmet } from "react-helmet-async";
 
 const ScholershipDetails = () => {
   const { id } = useParams();
@@ -35,6 +36,9 @@ const ScholershipDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{scholarship_name} | Apply4Scholar </title>
+      </Helmet>
       <PageTitle
         title={scholarship_name}
         subtitle={scholarship_description?.slice(0, 70)}

@@ -5,6 +5,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageScholarshipRow = ({ item, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -109,6 +110,9 @@ const ManageScholarshipRow = ({ item, refetch }) => {
 
   return (
     <>
+      <Helmet>
+        <title> Manage Scholarship | Apply4Scholar </title>
+      </Helmet>
       <tr>
         <td>{scholarship_name}</td>
         <td>{university_name}</td>

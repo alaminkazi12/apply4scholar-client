@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner/Banner";
 import ContactUs from "./ContactUs/ContactUs";
 import FAQ from "./FAQ/FAQ";
@@ -7,6 +8,9 @@ import TopScholarshops from "./TopScholarships/TopScholarshops";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home | Apply4Scholar.com</title>
+      </Helmet>
       <Banner></Banner>
       <TopScholarshops></TopScholarshops>
       <Reveiews></Reveiews>

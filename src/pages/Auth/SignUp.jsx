@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const validate = (values) => {
   const errors = {};
@@ -130,6 +131,9 @@ const SignUp = () => {
 
   return (
     <div>
+      <Helmet>
+        <title> Sign Up | Apply4Scholar </title>
+      </Helmet>
       <PageTitle
         title="Sign Up"
         subtitle="New to Apply4Scholar? Please create an account."

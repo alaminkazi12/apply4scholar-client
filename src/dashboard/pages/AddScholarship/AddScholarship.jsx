@@ -2,6 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const AddScholarship = () => {
   const axiosSecure = useAxiosSecure();
@@ -48,6 +49,9 @@ const AddScholarship = () => {
   };
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> Add Scholarship | Apply4Scholar </title>
+      </Helmet>
       <h2 className="text-center text-4xl mb-4 uppercase font-bold">
         ADD SCHOLARSHIP
       </h2>

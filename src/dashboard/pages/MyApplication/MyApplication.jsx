@@ -3,6 +3,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 import ApplicationRow from "./ApplicationRow";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 
 const MyApplication = () => {
   // const [myApplications, setMyApplications] = useState([]);
@@ -41,6 +42,9 @@ const MyApplication = () => {
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+        <title> My Applications | Apply4Scholar </title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-4">
         My Application
       </h1>

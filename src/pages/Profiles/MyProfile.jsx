@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,9 @@ const MyProfile = () => {
 
   return (
     <div className="min-h-screen mt-10 flex flex-col items-center justify-center bg-gray-100 rounded-xl p-6 uppercase">
+      <Helmet>
+        <title> Profile | Apply4Scholar.com</title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold text-center mb-6 text-green-600">
         My Profile
       </h1>
