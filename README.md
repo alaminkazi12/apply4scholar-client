@@ -2,7 +2,7 @@ APPLY4SCHOLAR
 Welcome to APPLY4SCHOLAR, your one-stop destination for scholarship applications and opportunities!
 
 SITE NAME : APPLY4SCHOLAR
-SITE URL:
+SITE URL: https://apply4scholar.netlify.app/
 ADMIN EMAIL: mdalaminkazi189@gmail.com
 ADMIN PASS: Mdalaminkazi189@gmail.com
 
